@@ -1,10 +1,17 @@
 import { Router } from "express";
+
+import authenticated from "./middlewares/authenticated";
+
 import AuthenticateUserController from "./controllers/AuthenticateUserController";
+import CreateMessageController from "./controllers/CreateMessageController";
 
 const router = Router();
 
-const AuthenticateUser = new AuthenticateUserController();
+const authenticateUserController = new AuthenticateUserController();
+const createMessageController = new CreateMessageController();
 
-router.post('/authenticate', AuthenticateUser.handle);
+router.post('/authenticate', authenticateUserController.handle);
+
+router.post('/messages', authenticated, createMessageController.handle);
 
 export default router;

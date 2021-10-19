@@ -36,7 +36,7 @@ class AuthenticateUserService {
       },
     });
 
-    const { data: userData } = await axios.get<IUserResponse>("https://github.com/user", {
+    const { data: userData } = await axios.get<IUserResponse>("https://api.github.com/user", {
       headers: {
         authorization: `Bearer ${accessTokenResponse.access_token}`,
       },
@@ -69,7 +69,7 @@ class AuthenticateUserService {
         user: {
           name: userData.name,
           avatar_url: userData.avatar_url,
-          id: userData.id,
+          id: user.id,
         },
       },
       this.JWT_SECRET,

@@ -8,7 +8,7 @@ generator client {
 }
 
 model User {
-  id            String @id @default(uuid())
+  id            String  @id @default(uuid())
   name          String
   avatar_url    String
   url           String
@@ -19,5 +19,17 @@ model User {
   blog          String?
   login         String
 
+  messages Message[]
   @@map("users")
+}
+
+model Message {
+  id         String   @id @default(uuid())
+  text       String
+  created_ad DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id])
+
+  user_id    String
+  @@map("messages")
 }
